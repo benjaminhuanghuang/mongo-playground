@@ -1,0 +1,48 @@
+
+#
+#  $get and $lte
+#
+query = {
+            "user_id": user_id,
+            "start_ts": {
+                "$gte": start_date
+            },
+            "end_ts": {
+                "$lte": end_date
+            }
+        }
+        
+result_cursor = self.op_skill_active_status.find(query)
+
+#
+#  $or
+#
+user_query["$or"] = []
+name_regex = '^' + name_prefix
+user_query["$or"].append({"lastname": {'$regex': name_regex, "$options": "i"}})
+user_query["$or"].append({"username": {'$regex': name_regex, "$options": "i"}})
+
+
+
+#
+# $ regular expression and case sensitive
+#
+user_query["$or"] = []
+name_regex = '^' + name_prefix
+user_query["$or"].append({"lastname": {'$regex': name_regex, "$options": "i"}})
+user_query["$or"].append({"username": {'$regex': name_regex, "$options": "i"}})
+
+
+#
+# Sort by single field
+#
+db.Account.find().sort("UserName",pymongo.ASCENDING)  
+#
+# Sort by muliple fields
+#
+sortquery = [("start_ts", pymongo.ASCENDING),("end_ts", pymongo.DESCENDING)]
+result_cursor = self.user_session.find().sort(sortquery)
+
+        
+
+
