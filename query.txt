@@ -23,6 +23,11 @@ user_query["$or"].append({"lastname": {'$regex': name_regex, "$options": "i"}})
 user_query["$or"].append({"username": {'$regex': name_regex, "$options": "i"}})
 
 
+#
+# $in
+#
+user_query["role"] = {"$in": ["admin", "student", "tutor"]}
+
 
 #
 # $ regular expression and case sensitive
@@ -44,5 +49,4 @@ sortquery = [("start_ts", pymongo.ASCENDING),("end_ts", pymongo.DESCENDING)]
 result_cursor = self.user_session.find().sort(sortquery)
 
         
-
 

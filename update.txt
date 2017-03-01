@@ -1,0 +1,14 @@
+collection.update(query, doc, upsert=True)
+
+
+find = {
+            "user_id": userId,
+            "program_id": programId,
+            "report_date": reportDate.isoformat(),
+            "type": "DailySummary"
+        }
+        update = {
+            "report_data": dailySummaryData,
+            "created_date": createdDate.isoformat()
+        }
+        self.student_progress_report.update(find, {"$set": update}, upsert=True)
